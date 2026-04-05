@@ -9,7 +9,6 @@ LOG_FILE = f"{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
 logs_path = os.path.join(os.getcwd(), "logs")
 os.makedirs(logs_path, exist_ok=True)
 
-# 3️⃣ Full log file path
 LOG_FILE_PATH = os.path.join(logs_path, LOG_FILE)
 
 # 4️⃣ Configure logging
@@ -19,5 +18,5 @@ logging.basicConfig(
     level=logging.INFO,
 )
 
-# 5️⃣ Create logger object
-logger = logging.getLogger(__name__)
+if __name__=="__main__":
+    logging.info("logging has started")

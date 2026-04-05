@@ -1,5 +1,6 @@
 from setuptools import find_packages, setup
 from typing import List
+from src.logger import logging
 
 HYPEN_E_DOT = '-e .'
 
