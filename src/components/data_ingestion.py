@@ -9,6 +9,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".
 
 from src.exception import CustomException
 from src.logger import logging
+from src.components.data_transformation import DataTransformation
+from src.components.data_transformation import DataTransformationConfig
 
 @dataclass
 class DataIngestionConfig:
@@ -25,8 +27,9 @@ class DataIngestion:
         logging.info("Entered the data ingestion method or component")
         try:
             # Load dataset
-            df = pd.read_csv(r"C:\mlproject\notepad\data\StudentsPerformance.csv")
-            logging.info("Read the dataset as dataframe")
+            dataset_path = os.path.join(os.getcwd(), "notepad", "data", "StudentsPerformance.csv")
+            df = pd.read_csv(dataset_path)
+            logging.info(f"Read the dataset as dataframe from {dataset_path}")
             print(f"Dataset loaded: {df.shape[0]} rows, {df.shape[1]} columns")
 
             # Create artifacts folder in project root
@@ -61,4 +64,7 @@ class DataIngestion:
 
 if __name__ == "__main__":
     obj = DataIngestion()
-    obj.initiate_data_ingestion()
+    train_data, test_data = obj.initiate_data_ingestion()
+    
+    data_transformation = DataTransformation()
+    data_transformation.initiate_data_transformation(train_data, test_data)
